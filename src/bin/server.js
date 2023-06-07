@@ -1,40 +1,42 @@
 #!/usr/bin/env node
 
-require("dotenv").config();
-
 /**
  * Module dependencies.
  */
+import app from "../app";
+import debug from "debug";
+import http from "http";
 
-let app = require("../app");
-let debug = require("debug")("express-testing-all:server");
-let http = require("http");
+import { PORT } from "../config";
+
+/**
+ * Configures namespace for debugger
+ */
+debug("express-testing-all:server");
 
 /**
  * Get port from environment and store in Express.
  */
-
-let port = normalizePort(process.env.PORT || "3000");
+let port = normalizePort(PORT || "3000");
 app.set("port", port);
 
 /**
  * Create HTTP server.
  */
-
 let server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
 /**
  * Normalize a port into a number, string, or false.
+ * @param {any} val
+ * @returns {string | number | boolean} The input converted to a number, string, or boolean data type.
  */
-
 function normalizePort(val) {
   let port = parseInt(val, 10);
 
@@ -53,8 +55,9 @@ function normalizePort(val) {
 
 /**
  * Event listener for HTTP server "error" event.
+ * @param {Error} error
+ * @returns {void}
  */
-
 function onError(error) {
   if (error.syscall !== "listen") {
     throw error;
@@ -79,8 +82,8 @@ function onError(error) {
 
 /**
  * Event listener for HTTP server "listening" event.
+ * @returns {void}
  */
-
 function onListening() {
   let addr = server.address();
   let bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
