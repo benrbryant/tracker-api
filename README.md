@@ -12,3 +12,5 @@ This project was bootstrapped with [Express Application Generator](https://expre
 
 - [Express Application Generator](https://expressjs.com/en/starter/generator.html)
 - [Pug](https://pugjs.org/api/getting-started.html)
+- [MDN Express App Tutorial](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/)
+- [Express Testing Tutorial](https://www.albertgao.xyz/2017/05/24/how-to-test-expressjs-with-jest-and-supertest/)
