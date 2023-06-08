@@ -2,14 +2,9 @@ import express from "express";
 
 let router = express.Router();
 
-/* GET users listing. */
+/* GET  /user */
 router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
-
-/* GET users/cool listing. */
-router.get("/cool", function (req, res, next) {
-  res.send("You're so cool");
+  res.send("NOT IMPLEMENTED: user listing");
 });
 
 export default router;

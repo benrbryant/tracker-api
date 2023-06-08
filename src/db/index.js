@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { MONGODB_URL } from "./config";
+import { MONGODB_URL } from "../config";
 
 // Set up mongoose connection
 mongoose.set("strictQuery", false);
