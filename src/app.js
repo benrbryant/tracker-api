@@ -3,9 +3,8 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import mongoose from "mongoose";
 
-import { MONGODB_URL } from "./config";
+import { initDBConnection } from "./db";
 import indexRouter from "./routes/index";
 import usersRouter from "./routes/users";
 
@@ -15,9 +14,8 @@ let app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-// Set up mongoose connection
-mongoose.set("strictQuery", false);
-await mongoose.connect(MONGODB_URL);
+// connect to db
+initDBConnection();
 
 app.use(logger("dev"));
 app.use(express.json());
