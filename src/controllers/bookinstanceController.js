@@ -2,7 +2,12 @@ import asyncHandler from "../utils/asyncHandler";
 import BookInstance from "../db/models/bookinstance";
 
 export const bookinstanceList = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: bookinstance list");
+  const allBookInstances = await BookInstance.find().populate("book").exec();
+
+  res.render("bookinstanceList", {
+    title: "Book Instance List",
+    bookinstanceList: allBookInstances,
+  });
 });
 
 export const bookinstanceDetail = asyncHandler(async (req, res, next) => {

@@ -20,6 +20,11 @@ const router = express.Router();
 router.get("/", index);
 
 /**
+ * GET  /catalog/book/list
+ */
+router.get("/list", bookList);
+
+/**
  * GET  /catalog/book/create
  */
 router.get("/create", bookCreateGet);
@@ -53,10 +58,5 @@ router.get("/:id/update", bookUpdatePost);
  * GET  /catalog/book/:id
  */
 router.get("/:id", bookDetail);
-
-/**
- * GET  /catalog/book/list
- */
-router.get("/list", bookList);
 
 export default router;

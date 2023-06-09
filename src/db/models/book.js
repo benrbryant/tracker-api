@@ -19,4 +19,8 @@ BookSchema.virtual("url").get(function () {
   return `/catalog/book/${this._id}`;
 });
 
-export default mongoose.model("Book", BookSchema);
+/**
+ * @type {mongoose.Model}
+ */
+const Book = mongoose.model("Book", BookSchema);
+export default Book;
