@@ -10,6 +10,7 @@ This project was bootstrapped with [Express Application Generator](https://expre
 
 ## Resources
 
+- [Jest Docs](https://jestjs.io/docs/getting-started)
 - [Express Application Generator](https://expressjs.com/en/starter/generator.html)
 - [Pug](https://pugjs.org/api/getting-started.html)
 - [MDN Express App Tutorial](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/)
