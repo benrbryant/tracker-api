@@ -15,3 +15,4 @@ This project was bootstrapped with [Express Application Generator](https://expre
 - [Pug](https://pugjs.org/api/getting-started.html)
 - [MDN Express App Tutorial](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/)
 - [Express Testing Tutorial](https://www.albertgao.xyz/2017/05/24/how-to-test-expressjs-with-jest-and-supertest/)
+- [Auth0 Securing RESTful APIs](https://auth0.com/blog/node-js-and-express-tutorial-building-and-securing-restful-apis/)

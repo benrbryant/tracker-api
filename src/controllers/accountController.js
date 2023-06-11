@@ -1,5 +1,5 @@
 import asyncHandler from "../utils/asyncHandler";
-import Author from "../db/models/author";
+import Author from "../db/models/account";
 
 export const authorList = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: Author list");

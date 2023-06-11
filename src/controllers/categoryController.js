@@ -1,7 +1,7 @@
 import asyncHandler from "../utils/asyncHandler";
-import Genre from "../db/models/genre";
+import Category from "../db/models/category";
 
-export const genreList = asyncHandler(async (req, res, next) => {
+export const getAllCategories = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: genre list");
 });
 

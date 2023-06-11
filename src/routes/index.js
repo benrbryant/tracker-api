@@ -1,26 +1,15 @@
 import express from "express";
 
-import catalogRoutes from "./catalog";
-import userRoutes from "./users";
-
 let router = express.Router();
 
 /**
- * GET  /
+ * GET  /api/v1/test
  */
-router.get("/", function (req, res, next) {
-  res.redirect("/catalog/book");
+router.get("/test", (req, res, next) => {
+  res.json({
+    message: "test succeeded",
+    creds: req.auth,
+  });
 });
-
-/**
- * GET  /user
- */
-router.use("/user", userRoutes);
-
-/**
- * ANY  /catalog
- */
-
-router.use("/catalog", catalogRoutes);
 
 export default router;

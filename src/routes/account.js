@@ -10,7 +10,7 @@ import {
   authorUpdateGet,
   authorUpdatePost,
   index,
-} from "../../controllers/authorController";
+} from "../controllers/accountController";
 
 const router = express.Router();
 

@@ -4,17 +4,17 @@ import mongoose from "mongoose";
  * @type {mongoose.Schema}
  */
 const AuthorSchema = mongoose.Schema({
-  first_name: { type: String, required: true, maxLength: 100 },
-  last_name: { type: String, required: true, maxLength: 100 },
-  date_of_birth: { type: Date },
-  date_of_death: { type: Date },
+  firstName: { type: String, required: true, maxLength: 100 },
+  lastName: { type: String, required: true, maxLength: 100 },
+  email: { type: String, required: true },
+  dob: { type: Date },
 });
 
 AuthorSchema.virtual("name").get(function () {
   let fullName = "";
 
-  if (this.first_name && this.last_name) {
-    fullName = `${this.first_name} ${this.last_name}`;
+  if (this.firstName && this.lastName) {
+    fullName = `${this.firstName} ${this.lastName}`;
   }
 
   return fullName;
