@@ -8,7 +8,7 @@ let router = express.Router();
 router.get("/test", (req, res, next) => {
   res.json({
     message: "test succeeded",
-    creds: req.auth,
+    auth: req.oidc.isAuthenticated() ? "Logged in" : "Logged out",
   });
 });
 

@@ -11,7 +11,8 @@ import { rateLimit } from "express-rate-limit";
 import { initDBConnection } from "./db";
 import routes from "./routes/index";
 import { MAX_REQUEST_COUNT_LIMIT, REQUEST_RATE_TIME_LIMIT } from "./config";
-import checkJwt from "./utils/jwtMiddleware";
+import authMiddleware from "./utils/authMiddleware";
+import { requiresAuth } from "express-openid-connect";
 
 let app = express();
 
@@ -26,7 +27,10 @@ initDBConnection();
 app.use(helmet());
 app.use(compression());
 app.use(cors());
-app.use(checkJwt);
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(authMiddleware);
+
 app.use(limiter);
 app.use(logger("dev"));
 app.use(express.json());
@@ -35,6 +39,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/v1", routes);
+
+app.get("/", requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
