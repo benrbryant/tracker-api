@@ -2,6 +2,9 @@ import createError from "http-errors";
 import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
+import session from "express-session";
+import createMongoDBSession from "connect-mongodb-session";
+import passport from "passport";
 import logger from "morgan";
 import cors from "cors";
 import helmet from "helmet";
@@ -10,11 +13,29 @@ import { rateLimit } from "express-rate-limit";
 
 import { initDBConnection } from "./db";
 import routes from "./routes/index";
-import { MAX_REQUEST_COUNT_LIMIT, REQUEST_RATE_TIME_LIMIT } from "./config";
+import {
+  MAX_REQUEST_COUNT_LIMIT,
+  REQUEST_RATE_TIME_LIMIT,
+  MONGODB_URL,
+  AUTH_SECRET,
+  SESSION_EXPIRATION,
+} from "./config";
 import authMiddleware from "./utils/authMiddleware";
 import { requiresAuth } from "express-openid-connect";
 
 let app = express();
+
+let MongoDBStore = createMongoDBSession(session);
+let store = new MongoDBStore(
+  {
+    uri: MONGODB_URL,
+    databaseName: MONGODB_DATABASE,
+    collection: "sessions",
+  },
+  function (error) {
+    // Should have gotten an error
+  }
+);
 
 let limiter = rateLimit({
   windowMs: REQUEST_RATE_TIME_LIMIT, // 1 minute
@@ -37,6 +58,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(
+  session({
+    secret: AUTH_SECRET,
+    cookie: {
+      maxAge: SESSION_EXPIRATION,
+    },
+    store: store,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 app.use("/api/v1", routes);
 
