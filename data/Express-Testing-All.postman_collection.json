@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "06bda559-5e9e-474d-b47b-c942adf31cfc",
+		"name": "Express-Testing-All API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10697934"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": {{TEST_USERNAME}},\n    \"password\": {{TEST_PASSWORD}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/auth/login",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/auth/logout",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"\",\n    \"email\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/auth/signup",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/category/all",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/category/one/6490c40583bd6d4def67f505",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"one",
+								"6490c40583bd6d4def67f505"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Test\",\n    \"template\": \"Type: <STRING>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/category/add",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"template\": \"Type: <STRING>\\nAmount: <NUMBER>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/category/update/6490c40583bd6d4def67f505",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"update",
+								"6490c40583bd6d4def67f505"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/category/delete/6490c40583bd6d4def67f505",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"category",
+								"delete",
+								"6490c40583bd6d4def67f505"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Instance",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/instance/all",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"instance",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/instance/one/6490cdc33ca692b6e69bba59",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"instance",
+								"one",
+								"6490cdc33ca692b6e69bba59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Type: Ferns\",\n    \"categoryId\": \"6490c39583bd6d4def67f4fe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/instance/add",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"instance",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Type: Lavender\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/instance/update/6490cd7f3ca692b6e69bba52",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"instance",
+								"update",
+								"6490cd7f3ca692b6e69bba52"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/instance/delete/6490cdc33ca692b6e69bba59",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"instance",
+								"delete",
+								"6490cdc33ca692b6e69bba59"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER_URL}}/api/v1/user/current",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"current"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik9WNXc2Z2V0ankwX1A2MDlaekNFWiJ9.eyJpc3MiOiJodHRwczovL2Rldi1ycTYyaW5vZi51cy5hdXRoMC5jb20vIiwic3ViIjoienZvQUZWZ2pmdXN2ajhuRDhzejNxUzV0RTFjaW9INmFAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vdHJhY2tlci1hcGkiLCJpYXQiOjE2ODY0ODg1NDcsImV4cCI6MTY4NjU3NDk0NywiYXpwIjoienZvQUZWZ2pmdXN2ajhuRDhzejNxUzV0RTFjaW9INmEiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.IZtVcXq1-UuTFfetzBeRDpMnn19yhE5Wh8ehk1M71bSGrkfxelvJVbMZEqyMGmEHoRiveHCyyMK-uM-Oj58841q6Or9OujAnie1W3Br4oW2Oz2S493L7D-DvRWYRKg1Xos7GOj5V4KSwL0TowN1Y5QgI71G05xnvlGVitume_IJIzeLRhTjpt--cSTNmo0hUsWzrrN5OqqagSmEXO0jnFuCm77aa4TGehDnaA7Rb2xorzvmoP4FHcBHV6agmWxG-piKrEPm4glVIXyjjgUaorBDdkg9_AZI68QmFVbbHeTY6MpHzYZpsoIZE0pCCa9zEFsnvJ1ZzdaH_k8jQB-y_Qg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TEST_USERNAME",
+			"value": "test",
+			"type": "string"
+		},
+		{
+			"key": "TEST_PASSWORD",
+			"value": "abc123",
+			"type": "string"
+		},
+		{
+			"key": "SERVER_URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
