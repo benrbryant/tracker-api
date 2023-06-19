@@ -3,14 +3,15 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import createMongoDBSession from "connect-mongodb-session";
 import passport from "passport";
-import logger from "morgan";
+import { Strategy } from "passport-local";
+import MongoStore from "connect-mongo";
+import User from "./db/models/user";
+import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import { rateLimit } from "express-rate-limit";
-
 import { initDBConnection } from "./db";
 import routes from "./routes/index";
 import {
@@ -20,22 +21,8 @@ import {
   AUTH_SECRET,
   SESSION_EXPIRATION,
 } from "./config";
-import authMiddleware from "./utils/authMiddleware";
-import { requiresAuth } from "express-openid-connect";
 
 let app = express();
-
-let MongoDBStore = createMongoDBSession(session);
-let store = new MongoDBStore(
-  {
-    uri: MONGODB_URL,
-    databaseName: MONGODB_DATABASE,
-    collection: "sessions",
-  },
-  function (error) {
-    // Should have gotten an error
-  }
-);
 
 let limiter = rateLimit({
   windowMs: REQUEST_RATE_TIME_LIMIT, // 1 minute
@@ -49,11 +36,8 @@ app.use(helmet());
 app.use(compression());
 app.use(cors());
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(authMiddleware);
-
 app.use(limiter);
-app.use(logger("dev"));
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -62,20 +46,26 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: AUTH_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({
+      mongoUrl: MONGODB_URL,
+      touchAfter: 24 * 3600, // seconds, 1 day
+    }),
     cookie: {
       maxAge: SESSION_EXPIRATION,
     },
-    store: store,
-    resave: true,
-    saveUninitialized: true,
   })
 );
 
-app.use("/api/v1", routes);
+const strategy = new Strategy(User.authenticate());
+passport.use(strategy);
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get("/", requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user));
-});
+app.use("/api/v1", routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -84,12 +74,10 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  console.error(err);
 
-  // render the error page
-  res.status(err.status || 500).json({ err: err.stack });
+  let errStatus = err.status || 500;
+  res.status(errStatus).json({ message: `${errStatus}: ${err.message}` });
 });
 
 export default app;
