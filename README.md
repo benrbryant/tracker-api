@@ -1,6 +1,6 @@
-# Express Testing Sandbox
+# Tracker API
 
-Practice Application to explore Express.js testing practices in 2023, and to prototype business features for future use.
+API powering Tracker Client applications.
 
 ## Getting Started
 
