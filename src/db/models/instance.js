@@ -9,9 +9,9 @@ const InstanceSchema = mongoose.Schema({
     ref: "Category",
     require: true,
   },
-  account: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Account",
+    ref: "User",
     require: true,
   },
   description: {
