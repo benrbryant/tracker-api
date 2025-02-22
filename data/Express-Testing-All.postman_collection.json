@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "06bda559-5e9e-474d-b47b-c942adf31cfc",
-		"name": "Express-Testing-All API",
+		"name": "Tracker API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10697934"
 	},
