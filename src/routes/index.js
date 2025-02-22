@@ -1,4 +1,5 @@
 import express from "express";
+import healthCheckRouter from "./healthCheck";
 import authRouter from "./auth";
 import userRouter from "./user";
 import categoryRouter from "./category";
@@ -6,6 +7,11 @@ import instanceRouter from "./instance";
 import isLoggedIn from "../utils/authMiddleware";
 
 let router = express.Router();
+
+/**
+ * USE  /api/v1/health-check/*
+ */
+router.use("/health-check", healthCheckRouter);
 
 /**
  * USE  /api/v1/user/*

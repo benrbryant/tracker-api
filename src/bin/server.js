@@ -12,7 +12,7 @@ import { PORT } from "../config";
 /**
  * Configures namespace for debugger
  */
-debug("express-testing-all:server");
+debug("tracker-api:server");
 
 /**
  * Get port from environment and store in Express.
