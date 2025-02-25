@@ -2,11 +2,7 @@ import createError from "http-errors";
 import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
-import session from "express-session";
 import passport from "passport";
-import { Strategy } from "passport-local";
-import MongoStore from "connect-mongo";
-import User from "./db/models/user";
 import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
@@ -17,10 +13,8 @@ import routes from "./routes/index";
 import {
   MAX_REQUEST_COUNT_LIMIT,
   REQUEST_RATE_TIME_LIMIT,
-  MONGODB_URL,
-  AUTH_SECRET,
-  SESSION_EXPIRATION,
 } from "./config";
+import { jwtStrategy, localStrategy } from "./utils/authMiddleware";
 
 let app = express();
 
@@ -43,27 +37,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(
-  session({
-    secret: AUTH_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({
-      mongoUrl: MONGODB_URL,
-      touchAfter: 24 * 3600, // seconds, 1 day
-    }),
-    cookie: {
-      maxAge: SESSION_EXPIRATION,
-    },
-  })
-);
-
-const strategy = new Strategy(User.authenticate());
-passport.use(strategy);
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 app.use(passport.initialize());
-app.use(passport.session());
 
 app.use("/api/v1", routes);
 
