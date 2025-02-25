@@ -4,7 +4,7 @@ import authRouter from "./auth";
 import userRouter from "./user";
 import categoryRouter from "./category";
 import instanceRouter from "./instance";
-import isLoggedIn from "../utils/authMiddleware";
+import { authenticate } from "../utils/authMiddleware";
 
 let router = express.Router();
 
@@ -16,17 +16,17 @@ router.use("/health-check", healthCheckRouter);
 /**
  * USE  /api/v1/user/*
  */
-router.use("/user", isLoggedIn, userRouter);
+router.use("/user", authenticate, userRouter);
 
 /**
  * USE  /api/v1/instance/*
  */
-router.use("/instance", isLoggedIn, instanceRouter);
+router.use("/instance", authenticate, instanceRouter);
 
 /**
  * USE  /api/v1/category/*
  */
-router.use("/category", isLoggedIn, categoryRouter);
+router.use("/category", authenticate, categoryRouter);
 
 /**
  * USE  /api/v1/auth/*

@@ -3,6 +3,7 @@ import passport from "passport";
 import {
   postLogin,
   postLogout,
+  postRefreshToken,
   postSignup,
 } from "../controllers/authController";
 
@@ -12,6 +13,8 @@ router.post("/signup", postSignup);
 
 router.post("/logout", postLogout);
 
-router.post("/login", passport.authenticate("local"), postLogin);
+router.post("/login", passport.authenticate("local", { session: false }), postLogin);
+
+router.post("/refresh-token", postRefreshToken);
 
 export default router;
