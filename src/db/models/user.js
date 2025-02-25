@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import passportLocalMongoose from "passport-local-mongoose";
 
 /**
  * @type {mongoose.Schema}
@@ -9,6 +8,7 @@ const UserSchema = mongoose.Schema({
   lastName: { type: String, maxLength: 100, required: true },
   email: { type: String, required: true },
   username: { type: String, required: true },
+  password: { type: String, required: true },
 });
 
 UserSchema.virtual("name").get(function () {
@@ -20,8 +20,6 @@ UserSchema.virtual("name").get(function () {
 
   return fullName;
 });
-
-UserSchema.plugin(passportLocalMongoose);
 
 /**
  * @type {mongoose.Model}
