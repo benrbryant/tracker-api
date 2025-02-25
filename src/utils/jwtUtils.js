@@ -1,6 +1,11 @@
 import jwt from "jsonwebtoken";
-import { AUTH_SECRET, SESSION_EXPIRATION } from "../config";
+import { ACCESS_TOKEN_EXPIRATION, ACCESS_TOKEN_SECRET, REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from "../config";
 
-export function generateAccessToken(username) {
-  return jwt.sign({ username }, AUTH_SECRET, { expiresIn: SESSION_EXPIRATION });
+export function generateAccessToken(payload) {
+  return jwt.sign(payload, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRATION });
 }
+
+export function generateRefreshToken(payload) {
+  return jwt.sign(payload, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRATION });
+}
+
