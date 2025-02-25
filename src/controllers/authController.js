@@ -30,7 +30,8 @@ export const postSignup = asyncHandler(async (req, res, next) => {
 });
 
 export const postLogin = asyncHandler(async (req, res, next) => {
-  const tokenPayload = { userId: req.user._id, username: req.user.userId };
+  const tokenPayload = { userId: req.user.userId, username: req.user.username };
+  
   const token = generateAccessToken(tokenPayload);
   const refreshToken = generateRefreshToken(tokenPayload);
 
@@ -69,6 +70,10 @@ export const postRefreshToken = asyncHandler(async (req, res, next) => {
   }
 
   jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, async (err, user) => {
+    if (!user) {
+      return next(createHttpError(400));
+    }
+
     const storedToken = await RefreshToken.findOne({
       userId: user.userId,
       token: refreshToken,
@@ -78,12 +83,10 @@ export const postRefreshToken = asyncHandler(async (req, res, next) => {
       next(createHttpError(403));
     }
 
-    const existingUser = await User.findOne({
-      userId: user.userId,
-    });
+    const existingUser = await User.findById(user.userId);
 
-    if (!user) {
-      next(createHttpError(403));
+    if (!existingUser) {
+      return next(createHttpError(403));
     }
 
     let accessToken = generateAccessToken({
