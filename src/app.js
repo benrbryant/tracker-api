@@ -1,6 +1,5 @@
 import createError from "http-errors";
 import express from "express";
-import path from "path";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import morgan from "morgan";
@@ -35,7 +34,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
