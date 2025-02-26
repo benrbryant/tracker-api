@@ -14,7 +14,7 @@ If you want to work on this project, you need to run through a few setup steps. 
    - locate your MongoDB connection string
    - locate your MongoDB user and password
 5. For `BASE_URL` and `PORT`, just make sure they match. In development, they can be `http://localhost:8080` and `8080` respectively.
-6. For `AUTH_SECRET`, this can be any string, but make sure it is at least 16 characters long for security purposes.
+6. For `AUTH_SECRET`, `ACCESS_TOKEN_SECRET`, and `REFRESH_TOKEN_SECRET`, this can be any string, but make sure it is at least 32 bytes long for security purposes.
 7. (Optional) Lastly, have [Postman](https://www.postman.com/downloads/) downloaded, and import the project collection located at `data/Express-Testing-All.postman_collection.json`
 
 At this point you should be up and running for development! All contributions are welcome.
