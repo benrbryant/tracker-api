@@ -30,7 +30,7 @@ export const postSignup = asyncHandler(async (req, res, next) => {
 });
 
 export const postLogin = asyncHandler(async (req, res, next) => {
-  const tokenPayload = { userId: req.user.userId, username: req.user.username };
+  const tokenPayload = { _id: req.user._id, username: req.user.username };
   
   const token = generateAccessToken(tokenPayload);
   const refreshToken = generateRefreshToken(tokenPayload);
@@ -43,7 +43,7 @@ export const postLogin = asyncHandler(async (req, res, next) => {
   res.json({
     message: "Successful login",
     user: {
-      userId: req.user._id,
+      _id: req.user._id,
       username: req.user.username,
     },
     token,
@@ -52,7 +52,7 @@ export const postLogin = asyncHandler(async (req, res, next) => {
 });
 
 export const postLogout = asyncHandler(async (req, res, next) => {
-  let userId = req.user && req.user.userId;
+  let userId = req.user && req.user._id;
 
   if (!userId) {
     next(createHttpError(400));
@@ -75,7 +75,7 @@ export const postRefreshToken = asyncHandler(async (req, res, next) => {
     }
 
     const storedToken = await RefreshToken.findOne({
-      userId: user.userId,
+      userId: user._id,
       token: refreshToken,
     });
 
@@ -83,14 +83,14 @@ export const postRefreshToken = asyncHandler(async (req, res, next) => {
       next(createHttpError(403));
     }
 
-    const existingUser = await User.findById(user.userId);
+    const existingUser = await User.findById(user._id);
 
     if (!existingUser) {
       return next(createHttpError(403));
     }
 
     let accessToken = generateAccessToken({
-      userId: existingUser.userId,
+      _id: existingUser._id,
       username: existingUser.username,
     });
 
