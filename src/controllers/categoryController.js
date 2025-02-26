@@ -1,8 +1,8 @@
 import Category from "../db/models/category";
 import asyncHandler from "../utils/asyncHandler";
 
-export const getAllByUsername = asyncHandler(async (req, res, next) => {
-  let categories = await Category.find({ user: req.user._id });
+export const getAllByUser = asyncHandler(async (req, res, next) => {
+  let categories = await Category.find({ userId: req.user._id });
   res.json({ data: categories });
 });
 
@@ -16,7 +16,7 @@ export const createOne = asyncHandler(async (req, res, next) => {
   let { name, template } = req.body;
 
   let newCategory = await Category.create({
-    user: req.user._id,
+    userId: req.user._id,
     name,
     template,
   });

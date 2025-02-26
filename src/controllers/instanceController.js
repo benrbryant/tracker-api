@@ -1,9 +1,9 @@
 import Instance from "../db/models/instance";
 import asyncHandler from "../utils/asyncHandler";
 
-export const getAll = asyncHandler(async (req, res, next) => {
+export const getAllByUser = asyncHandler(async (req, res, next) => {
   let details = {
-    user: req.user._id,
+    userId: req.user._id,
   };
 
   if (req.query.categoryId) {
@@ -24,7 +24,7 @@ export const createOne = asyncHandler(async (req, res, next) => {
   let { description, startDate, endDate, categoryId } = req.body;
   let details = {
     category: categoryId,
-    user: req.user._id,
+    userId: req.user._id,
     description,
     startDate,
     endDate,
