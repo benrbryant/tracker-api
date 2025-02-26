@@ -2,14 +2,14 @@ import express from "express";
 import {
   createOne,
   deleteOne,
-  getAllByUsername,
+  getAllByUser,
   getOneById,
   updateOne,
 } from "../controllers/categoryController";
 
 const router = express.Router();
 
-router.get("/all", getAllByUsername);
+router.get("/all", getAllByUser);
 
 router.get("/one/:id", getOneById);
 
